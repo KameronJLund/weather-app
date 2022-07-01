@@ -3,7 +3,6 @@ const express = require('express')
 const hbs = require('hbs')
 const forecast = require('../utils/forecast')
 const geocode = require('../utils/geocode')
-const chalkTheme = require('../chalk-themes')
 
 console.log(__dirname)
 
@@ -53,13 +52,13 @@ app.get('/weather', (req, res) => {
     geocode(req.query.address, (error, { latitude, longitude, location } = {}) => {
         if (error || !location) {
             res.send({ error })
-            return console.log(chalkTheme('red', error))
+            return console.log(error)
         }
 
         forecast(latitude, longitude, (error, { description, temperature, feelslike } = {}) => {
             if (error) {
                 res.send({ error })
-                return console.log(chalkTheme('red', error))
+                return console.log(error)
             }
 
             res.send({
@@ -71,8 +70,8 @@ app.get('/weather', (req, res) => {
                 feelslike
             })
 
-            console.log(chalkTheme('blue', 'The weather in ' + location + ' is ' + description +
-                ' at ' + temperature + ' degrees F, \nbut it feels like ' + feelslike + ' degrees F'))
+            console.log('The weather in ' + location + ' is ' + description +
+                ' at ' + temperature + ' degrees F, \nbut it feels like ' + feelslike + ' degrees F')
         })
     })
 
