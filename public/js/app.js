@@ -32,6 +32,7 @@ weatherForm.addEventListener('submit', (event) => {
                     + '\nlongitude: ' + data.longitude
                 messageTwo.textContent = '\n' + data.description
                     + ' at ' + data.temperature + ' degrees'
+                    + ' with humidity of ' + data.humidity
             }
         })
     })
